@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { ref, computed } from 'vue'
 export default {
   name: 'TheAccordion',
   props: {
@@ -19,20 +20,30 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      isOpen: false
+  setup() {
+    const isOpen = ref(false)
+    const open = () => {
+      isOpen.value = !isOpen.value
     }
-  },
-  computed: {
-    arrowIcon() {
-      return this.isOpen ? ['fas', 'angle-up'] : ['fas', 'angle-down']
-    }
-  },
-  methods: {
-    open() {
-      this.isOpen = !this.isOpen
-    }
+    const arrowIcon = computed(() => (isOpen.value ? ['fas', 'angle-up'] : ['fas', 'angle-down']))
+    return { open, isOpen, arrowIcon }
   }
+
+  // Updating component from Options API in Vue2 to Component API in Vue3
+  // data() {
+  //   return {
+  //     isOpen: false
+  //   }
+  // },
+  // computed: {
+  //   arrowIcon() {
+  //     return this.isOpen ? ['fas', 'angle-up'] : ['fas', 'angle-down']
+  //   }
+  // },
+  // methods: {
+  //   open() {
+  //     this.isOpen = !this.isOpen
+  //   }
+  // }
 }
 </script>
