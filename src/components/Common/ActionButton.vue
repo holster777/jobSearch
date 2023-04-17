@@ -4,36 +4,25 @@
   </button>
 </template>
 
-<script>
+<!-- updated to lastest version of composition API in Vue3.2 -->
+<script setup>
 import { computed } from 'vue'
-export default {
-  name: 'ActionButton',
-  props: {
-    text: {
-      type: String,
-      required: true
-    },
-    type: {
-      type: String,
-      required: false,
-      default: 'primary'
-    }
+const props = defineProps({
+  text: {
+    type: String,
+    required: true
   },
-  setup(props) {
-    const buttonClass = computed(() => {
-      return {
-        [props.type]: true
-      }
-    })
-    return { buttonClass }
+  type: {
+    type: String,
+    required: false,
+    default: 'primary'
   }
-  // Updated from options API in Vue2 to Components API in Vue3
-  // computed: {
-  //   buttonClass() {
-  //     return { [this.type]: true }
-  //   }
-  // }
-}
+})
+const buttonClass = computed(() => {
+  return {
+    [props.type]: true
+  }
+})
 </script>
 
 <style scoped>
